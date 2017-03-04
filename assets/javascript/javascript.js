@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var winCounter = 0;
 	var lossCounter = 0;
 	var outOfTime = 0;
-	var questionCounter = 0;
+	var questionCounter;
 	var questionTimeout;
 	var questionInterval;
 	var seconds;
@@ -58,13 +58,12 @@ $(document).ready(function() {
 		clearBody();
 		stopTime();
 		questionCounter++;
-		//console.log(questionCounter);
+		console.log(questionCounter);
 		questionTimer();
 		getQuestion(currentQuestion);
 		displayQuestion(currentQuestion);
 		displayAnswers();
 		enableAnswerClicks();
-
 	}
 
 	function clearBody() {
@@ -104,11 +103,12 @@ $(document).ready(function() {
 	function endOfRoundScreen() {
 		clearBody();
 		stopTime();
+		console.log('endOfRoundScreen is called');
 		$('body').append('<p> Correct Answers: ' + winCounter + '</p>');
 		$('body').append('<p> Incorrect Answers: ' + lossCounter + '</p>');
 		$('body').append('<p> Unanswered: ' + outOfTime + '</p>');
 		$('body').append('<button class="newRound"> Start Over? </button>');
-		$('.newRound').click(initialize());
+		$('.newRound').on('click', initialize);
 	}
 
 	function displayAnswers() {
@@ -207,7 +207,8 @@ $(document).ready(function() {
 	function nextQuestionTimer() {
 		questionTimeout = setTimeout(function() {
 			console.log('Out of time!');
-			if (questionCounter <= 5) {
+			console.log(questionCounter);
+			if (questionCounter < 3) {
 				questionScreen();
 			} else{
 				endOfRoundScreen();
