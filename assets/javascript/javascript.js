@@ -42,7 +42,7 @@ $(document).ready(function() {
 	initialize();
 
 	function displayQuestion(currentQuestion) {
-		$('Body').append('Current Question is: ').append(currentQuestion.ask);
+		$('#game-body').append('Current Question is: ').append(currentQuestion.ask);
 	}	
 
 	// print question
@@ -58,7 +58,7 @@ $(document).ready(function() {
 		clearBody();
 		stopTime();
 		questionCounter++;
-		console.log(questionCounter);
+		console.log("Question # ", questionCounter);
 		questionTimer();
 		getQuestion(currentQuestion);
 		displayQuestion(currentQuestion);
@@ -67,8 +67,8 @@ $(document).ready(function() {
 	}
 
 	function clearBody() {
-		$('body').html('<div class="divHeader"> </div>');
-		$('body').append('<div class="divBody"> </div>');
+		$('#game-body').html('<div class="divHeader"> </div>');
+		$('#game-body').append('<div class="divBody"> </div>');
 	}
 
 	function correctAnswerScreen() {
@@ -77,7 +77,7 @@ $(document).ready(function() {
 		winCounter++;
 		nextQuestionTimer();
 		var currentAnswer = currentQuestion.answer;
-		$('body').append('<p> Nice job! </p>');
+		$('#game-body').append('<p> Nice job! </p>');
 		
 
 	}
@@ -88,7 +88,7 @@ $(document).ready(function() {
 		lossCounter++;
 		nextQuestionTimer();
 		var currentAnswer = currentQuestion.answer;
-		$('body').append('<p> Nope! The correct answer is ' + currentQuestion.options[currentAnswer] + '. </p>');
+		$('#game-body').append('<p> Nope! The correct answer is ' + currentQuestion.options[currentAnswer] + '. </p>');
 	}
 
 	function outOfTimeScreen() {
@@ -97,24 +97,24 @@ $(document).ready(function() {
 		outOfTime++;
 		nextQuestionTimer();
 		var currentAnswer = currentQuestion.answer;
-		$('body').append('Ouf of time! The correct answer is ' + currentQuestion.options[currentAnswer] + '. </p>')
+		$('#game-body').append('Ouf of time! The correct answer is ' + currentQuestion.options[currentAnswer] + '. </p>')
 	}
 
 	function endOfRoundScreen() {
 		clearBody();
 		stopTime();
 		console.log('endOfRoundScreen is called');
-		$('body').append('<p> Correct Answers: ' + winCounter + '</p>');
-		$('body').append('<p> Incorrect Answers: ' + lossCounter + '</p>');
-		$('body').append('<p> Unanswered: ' + outOfTime + '</p>');
-		$('body').append('<button class="newRound"> Start Over? </button>');
+		$('#game-body').append('<p> Correct Answers: ' + winCounter + '</p>');
+		$('#game-body').append('<p> Incorrect Answers: ' + lossCounter + '</p>');
+		$('#game-body').append('<p> Unanswered: ' + outOfTime + '</p>');
+		$('#game-body').append('<button class="newRound"> Start Over? </button>');
 		$('.newRound').on('click', initialize);
 	}
 
 	function displayAnswers() {
 		// creates four divs with classes .option0 through .option3 that list answers.
 		for (i = 0; i < 4; i++) {
-			$('Body').append('<div class="option' + i + '"> </div>');
+			$('#game-body').append('<div class="option' + i + '"> </div>');
 			//$('.divBody').append('<br>' + triviaQuestions.question1.options[0]);
 			$('.option' + i).append(currentQuestion.options[i]);
 		}	
